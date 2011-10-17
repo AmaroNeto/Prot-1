@@ -29,6 +29,7 @@ public class Login extends Activity implements OnClickListener{
         Button entrar = (Button) findViewById(R.id.entrar);
         entrar.setOnClickListener(this);
         
+        
         /*
          * Get existing access_token if any
          */
@@ -46,9 +47,9 @@ public class Login extends Activity implements OnClickListener{
         
         /*
          * Only call authorize if the access_token has expired.
-         */
+        */ 
         if(!facebook.isSessionValid()) {
-
+        	
             facebook.authorize(this, new String[] {"user_about_me","user_events","user_groups","user_interests","user_likes","user_religion_politics"}, new DialogListener() {
                 @Override
                 public void onComplete(Bundle values) {
@@ -56,8 +57,7 @@ public class Login extends Activity implements OnClickListener{
                     editor.putString("access_token", facebook.getAccessToken());
                     editor.putLong("access_expires", facebook.getAccessExpires());
                     editor.commit();
-                    
-                    
+                          
                 }
     
                 @Override
