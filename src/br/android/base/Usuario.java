@@ -11,5 +11,10 @@ public class Usuario {
 	private String localidade;
 	private ArrayList<Likes> likes;
 	private ArrayList<Eventos> eventos;
-	
+	private ArrayList<Musicas> musicas;
+	private ArrayList<Filmes> filmes;
+	private ArrayList<Games> games;
+	private ArrayList<Livros> livros;
+	private ArrayList<TV> tv;
+	private ArrayList<Atividades> atividades;
 }
