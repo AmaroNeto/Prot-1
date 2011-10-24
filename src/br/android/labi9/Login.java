@@ -1,6 +1,13 @@
 package br.android.labi9;
 
-import java.security.Principal;
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
+import br.android.funcoes.TratarJson;
+import br.android.funcoes.WebService;
+import br.android.repositorio.Repositorio;
 
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
@@ -8,8 +15,10 @@ import com.facebook.android.FacebookError;
 import com.facebook.android.Facebook.DialogListener;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ParseException;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +29,9 @@ public class Login extends Activity implements OnClickListener{
 	Facebook facebook = new Facebook("245556445494965");
     String FILENAME = "Recife_Plus";
     private SharedPreferences mPrefs;
+	private static ProgressDialog dialogo;
+	private Repositorio repositorio;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,9 +94,52 @@ public class Login extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		
+		dialogo = ProgressDialog.show(this, "Analisando Usuario", "Aguarde enquanto buscamos suas informacoes...", false, true);
+		this.criarUsuario();
+		
 		Intent it = new Intent(this,br.android.labi9.Principal.class);
+		Bundle params = new Bundle();
+		
 		startActivity(it);
 		
+	}
+	//Metodo STOP para a thread acima.
+	public static void stopJanela(){
+		dialogo.dismiss();
+	}
+	
+	/**
+	 * Metodo que cria um usuario a partir da conexao com a internet
+	 */
+	public void criarUsuario(){
+		new Thread(){
+			public void run() {
+				String url = "https://graph.facebook.com/me/?access_token=";
+		
+				WebService con = null;
+				
+				try {
+					
+					con = new WebService(url);
+					
+					repositorio = new Repositorio(new TratarJson().tratarUsuario(con.conectar()));
+		
+					//excecoes
+				} catch (ClientProtocolException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}finally{
+					con.encerrar();
+					//con =null;
+					stopJanela();
+				}
+			}
+		}.start();
 	}
 	
 }

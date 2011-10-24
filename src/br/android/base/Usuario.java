@@ -12,8 +12,8 @@ public class Usuario {
 	
 	//Atributos da classe
 	private String ID;
-	private String nome;
-	private String usuario;
+	private String PrimeiroNome;
+	private String UltimoNome;
 	private String genero;
 	private String localidade;
 	private ArrayList<Likes> likes;
@@ -29,39 +29,44 @@ public class Usuario {
 	 * Construtor da classe usuario
 	 * 
 	 * @param id
-	 * @param nome
+	 * @param Primeironome
+	 * @param UltimoNome
 	 * @param usuario
 	 * @param genero
 	 * @param localidade
 	 */
-	public Usuario(String id,String nome,String usuario,String genero,String localidade){
+	public Usuario(String id,String primeiroNome,String ultimoNome,String genero,String localidade){
 		
 		this.setID(id);
-		this.setNome(nome);
-		this.setUsuario(usuario);
+		this.setPrimeiroNome(primeiroNome);
+		this.setUltimoNome(ultimoNome);
 		this.setGenero(genero);
 		this.setLocalidade(localidade);
 		
 	}
-	
+
+	public String getPrimeiroNome() {
+		return PrimeiroNome;
+	}
+
+	public void setPrimeiroNome(String primeiroNome) {
+		PrimeiroNome = primeiroNome;
+	}
+
+	public String getUltimoNome() {
+		return UltimoNome;
+	}
+
+	public void setUltimoNome(String ultimoNome) {
+		UltimoNome = ultimoNome;
+	}
+
 	//Getts e Setts
 	public String getID() {
 		return ID;
 	}
 	public void setID(String iD) {
 		ID = iD;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 	public String getGenero() {
 		return genero;
