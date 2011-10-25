@@ -9,9 +9,6 @@ public class Principal extends Activity{
 			
 		super.onCreate(icicle);
 		
-		String nome = 
-		TextView nome = find
-		setContentView(R.layout.principal);
 	}
 
 }

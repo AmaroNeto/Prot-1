@@ -1,11 +1,11 @@
 package br.android.base;
 
-public abstract class Entreterimento {
+public abstract class Entretenimento {
 	
 	private String nome;
 	private String ID;
 	
-	public Entreterimento(String nome, String id){
+	public Entretenimento(String nome, String id){
 
 		this.setID(id);
 		this.setNome(nome);
@@ -23,5 +23,4 @@ public abstract class Entreterimento {
 	public void setID(String iD) {
 		ID = iD;
 	}
-	
 }

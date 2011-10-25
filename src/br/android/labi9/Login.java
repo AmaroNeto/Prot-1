@@ -1,10 +1,17 @@
 package br.android.labi9;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
+import br.android.base.Atividades;
+import br.android.base.Eventos;
+import br.android.base.Filmes;
+import br.android.base.Likes;
+import br.android.base.Musicas;
+import br.android.base.TV;
 import br.android.funcoes.TratarJson;
 import br.android.funcoes.WebService;
 import br.android.repositorio.Repositorio;
@@ -23,6 +30,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Login extends Activity implements OnClickListener{
     
@@ -114,16 +122,46 @@ public class Login extends Activity implements OnClickListener{
 	public void criarUsuario(){
 		new Thread(){
 			public void run() {
+				//urls para acessar informações dos usuarios
 				String url = "https://graph.facebook.com/me/?access_token=";
+				String likes = "https://graph.facebook.com/me/likes?access_token=";
+				String eventos = "https://graph.facebook.com/me/events?access_token=";
+				String atividades = "https://graph.facebook.com/me/activities?access_token=";
+				String musicas = "https://graph.facebook.com/me/music?access_token=";
+				String filmes = "https://graph.facebook.com/me/movies?access_token=";
+				String tv = "https://graph.facebook.com/me/television?access_token=";
 		
 				WebService con = null;
 				
 				try {
 					
 					con = new WebService(url);
-					
 					repositorio = new Repositorio(new TratarJson().tratarUsuario(con.conectar()));
-		
+					
+					con = new WebService(likes);
+					ArrayList<Likes> llikes = new TratarJson().tratarLikes(con.conectar());
+					repositorio.getRepositorio().setLikes(llikes);
+					
+					con = new WebService(eventos);
+					ArrayList<Eventos> leventos = new TratarJson().tratarEventos(con.conectar());
+					repositorio.getRepositorio().setEventos(leventos);
+					
+					con = new WebService(atividades);
+					ArrayList<Atividades> latividades = new TratarJson().tratarAtividades(con.conectar());
+					repositorio.getRepositorio().setAtividades(latividades);
+					
+					con = new WebService(musicas);
+					ArrayList<Musicas> lmusicas = new TratarJson().tratarMusicas(con.conectar());
+					repositorio.getRepositorio().setMusicas(lmusicas);
+					
+					con = new WebService(filmes);
+					ArrayList<Filmes> lfilmes = new TratarJson().tratarFilmes(con.conectar());
+					repositorio.getRepositorio().setFilmes(lfilmes);
+					
+					con = new WebService(tv);
+					ArrayList<TV> ltv = new TratarJson().tratarTv(con.conectar());
+					repositorio.getRepositorio().setTv(ltv);
+					
 					//excecoes
 				} catch (ClientProtocolException e) {
 					e.printStackTrace();
@@ -140,6 +178,7 @@ public class Login extends Activity implements OnClickListener{
 				}
 			}
 		}.start();
+		//Toast.makeText(this, "Usuario cadastrado com sucesso", Toast.LENGTH_SHORT).show();
 	}
 	
 }

@@ -20,8 +20,6 @@ public class Usuario {
 	private ArrayList<Eventos> eventos;
 	private ArrayList<Musicas> musicas;
 	private ArrayList<Filmes> filmes;
-	private ArrayList<Games> games;
-	private ArrayList<Livros> livros;
 	private ArrayList<TV> tv;
 	private ArrayList<Atividades> atividades;
 	
@@ -103,18 +101,6 @@ public class Usuario {
 	}
 	public void setFilmes(ArrayList<Filmes> filmes) {
 		this.filmes = filmes;
-	}
-	public ArrayList<Games> getGames() {
-		return games;
-	}
-	public void setGames(ArrayList<Games> games) {
-		this.games = games;
-	}
-	public ArrayList<Livros> getLivros() {
-		return livros;
-	}
-	public void setLivros(ArrayList<Livros> livros) {
-		this.livros = livros;
 	}
 	public ArrayList<TV> getTv() {
 		return tv;
