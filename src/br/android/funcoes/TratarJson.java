@@ -41,7 +41,7 @@ public class TratarJson {
 		JSONObject local = faceUsuario.getJSONObject("location");
 		String localidade = local.getString("name");
 		
-		Usuario usuario = new Usuario(id, pNome, uNome,genero, localidade);
+		Usuario usuario = new Usuario(id,pNome, uNome,genero, localidade);
 		
 		return usuario;
 	}

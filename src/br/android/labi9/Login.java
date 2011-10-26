@@ -1,6 +1,7 @@
 package br.android.labi9;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
@@ -12,6 +13,8 @@ import br.android.base.Filmes;
 import br.android.base.Likes;
 import br.android.base.Musicas;
 import br.android.base.TV;
+import br.android.controle.Controle;
+import br.android.controle.InterfaceControle;
 import br.android.funcoes.TratarJson;
 import br.android.funcoes.WebService;
 import br.android.repositorio.Repositorio;
@@ -23,6 +26,7 @@ import com.facebook.android.Facebook.DialogListener;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ParseException;
@@ -37,9 +41,10 @@ public class Login extends Activity implements OnClickListener{
 	Facebook facebook = new Facebook("245556445494965");
     String FILENAME = "Recife_Plus";
     private SharedPreferences mPrefs;
+    
 	private static ProgressDialog dialogo;
 	private Repositorio repositorio;
-
+	private InterfaceControle controle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class Login extends Activity implements OnClickListener{
         String access_token = mPrefs.getString("access_token", null);
         long expires = mPrefs.getLong("access_expires", 0);
         
+        System.out.println("AQUI ------ "+access_token);
         
         if(access_token != null) {
             facebook.setAccessToken(access_token);
@@ -77,7 +83,8 @@ public class Login extends Activity implements OnClickListener{
                     editor.putString("access_token", facebook.getAccessToken());
                     editor.putLong("access_expires", facebook.getAccessExpires());
                     editor.commit();
-                          
+                   
+                    System.out.println(facebook.getAccessToken());
                 }
     
                 @Override
@@ -98,7 +105,6 @@ public class Login extends Activity implements OnClickListener{
 
         facebook.authorizeCallback(requestCode, resultCode, data);
     }
-
 	@Override
 	public void onClick(View v) {
 		
@@ -122,6 +128,9 @@ public class Login extends Activity implements OnClickListener{
 	public void criarUsuario(){
 		new Thread(){
 			public void run() {
+				
+				
+				
 				//urls para acessar informações dos usuarios
 				String url = "https://graph.facebook.com/me/?access_token=";
 				String likes = "https://graph.facebook.com/me/likes?access_token=";
@@ -161,6 +170,9 @@ public class Login extends Activity implements OnClickListener{
 					con = new WebService(tv);
 					ArrayList<TV> ltv = new TratarJson().tratarTv(con.conectar());
 					repositorio.getRepositorio().setTv(ltv);
+					
+					controle = Controle.getInstancia();
+					controle.setRepositorio(repositorio);
 					
 					//excecoes
 				} catch (ClientProtocolException e) {
