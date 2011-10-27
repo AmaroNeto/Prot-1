@@ -21,6 +21,8 @@ public class Principal extends Activity{
 		repositorio = controle.getRepositorio();
 		
 		if(repositorio != null){
+		
+		System.out.println("Tem alguma coisa");
 		System.out.println(repositorio.getRepositorio().getPrimeiroNome());
 		}
 		else{

@@ -62,6 +62,7 @@ public class Login extends Activity implements OnClickListener{
         String access_token = mPrefs.getString("access_token", null);
         long expires = mPrefs.getLong("access_expires", 0);
         
+        System.out.println("Token do Facebook"+facebook.getAccessToken());
         System.out.println("AQUI ------ "+access_token);
         
         if(access_token != null) {
@@ -129,7 +130,7 @@ public class Login extends Activity implements OnClickListener{
 		new Thread(){
 			public void run() {
 				
-				
+				//String token = "245556445494965|YDdD1Msb3Bo4qGM6SYf1mo6MpNU";
 				
 				//urls para acessar informações dos usuarios
 				String url = "https://graph.facebook.com/me/?access_token=";
