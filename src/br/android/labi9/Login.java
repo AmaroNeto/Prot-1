@@ -1,5 +1,6 @@
 package br.android.labi9;
 
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -112,9 +113,7 @@ public class Login extends Activity implements OnClickListener{
 		dialogo = ProgressDialog.show(this, "Analisando Usuario", "Aguarde enquanto buscamos suas informacoes...", false, true);
 		this.criarUsuario();
 		
-		Intent it = new Intent(this,br.android.labi9.Principal.class);
-		Bundle params = new Bundle();
-		
+		Intent it = new Intent(this,br.android.GPS.GPS_FinalActivity.class);
 		startActivity(it);
 		
 	}

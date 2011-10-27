@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    >
+    <LinearLayout android:background="#FFFFFF" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="wrap_content" android:layout_gravity="center">
+        <Button android:text="Str. View" android:id="@+id/buttonStreetView" android:layout_width="wrap_content" android:layout_gravity="center" android:layout_height="35dp"></Button>
+        <Button android:text="Sat. View" android:id="@+id/buttonSateliteView" android:layout_width="wrap_content" android:layout_gravity="center" android:layout_height="35dp"></Button>
+        <Button android:text="Meu local" android:layout_width="wrap_content" android:id="@+id/voltarAoCentro" android:layout_gravity="center" android:layout_height="35dp"></Button>
+        <Button android:text="Pesquisar" android:layout_width="wrap_content" android:id="@+id/pesquisar" android:layout_gravity="center" android:layout_height="35dp"></Button>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:weightSum="1">
+        <TextView android:textColor="#000000" android:text="Pesquisar" android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical"></TextView>
+        <EditText android:id="@+id/campoTexto" android:layout_width="match_parent" android:layout_height="40dp"></EditText>
+    </LinearLayout> 
+    
+    <com.google.android.maps.MapView 
+    android:clickable="true" 
+    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent" 
+    android:id="@+id/mapa"
+    android:apiKey = "0WKJLkE0jH79yiUzY4AwGdVj5KGDRhxy37-ZaOQ">
+    </com.google.android.maps.MapView>
+		
+</LinearLayout>

@@ -3,22 +3,24 @@
       package="br.android.labi9"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="10" />
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <uses-library  android:name="com.google.android.maps"/>
         <activity android:name=".Login"
-                  android:label="@string/app_name">
-            <intent-filter>
+                  android:label="@string/app_name"><intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="Principal">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"></action>
-            </intent-filter>
         </activity>
+        <activity android:name="br.android.GPS.GPS_FinalActivity"></activity>
 
     </application>
 </manifest>
