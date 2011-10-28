@@ -113,7 +113,7 @@ public class Login extends Activity implements OnClickListener{
 		dialogo = ProgressDialog.show(this, "Analisando Usuario", "Aguarde enquanto buscamos suas informacoes...", false, true);
 		this.criarUsuario();
 		
-		Intent it = new Intent(this,br.android.GPS.GPS_FinalActivity.class);
+		Intent it = new Intent(this,br.android.GPS.GPS_Progress_Dialog.class);
 		startActivity(it);
 		
 	}

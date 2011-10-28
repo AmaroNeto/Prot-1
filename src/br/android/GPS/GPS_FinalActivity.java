@@ -18,6 +18,7 @@ import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.OverlayItem;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -63,6 +64,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private static final String TAG = "ProximityTest";
 	private final String POI_REACHED = "com.example.proximitytest.POI_REACHED";
 	private PendingIntent proximityIntent;
+	private LocationManager locationManager;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) throws NullPointerException{
@@ -70,6 +72,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			//Criação da tela
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.maingps);
+			
 			setupProximityAlert();			
 			
 			//Criação do mapa
@@ -82,7 +85,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			controlador = map.getController();
 			//Zoom inicial do maps (Pode ser alterado de 1 até 21)
 			controlador.setZoom(15);
-			
+
 			//Criação da variável responsável pela tradução da String para aúdio
 			tts = new TextToSpeech(this, this);
 			 
@@ -136,6 +139,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			Button buttonStreetView = (Button) findViewById(R.id.buttonStreetView);
 			Button bntSearch = (Button) findViewById(R.id.pesquisar);
 			Button meuGPSLocal = (Button) findViewById(R.id.voltarAoCentro);
+			
 			
 			/*
 			 * Este trecho do código é chamado ao clicar o botão pesquisar.
@@ -205,15 +209,21 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			});
 			
 			try {
-				//Botão que centraliza o mapa no overlay do usuário
-				meuGPSLocal.setOnClickListener(new OnClickListener(){
-					public void onClick(View v) {
-						controlador.setCenter(ondeEstou.getMyLocation());
-					}
-				});
-			} catch (NullPointerException e) {
-				Toast.makeText(this, "Problema ao centralizar o mapa", Toast.LENGTH_SHORT).show();
-			}
+				//Botão que centraliza o mapa no overlay do usuário caso o GPS esteja ativo
+					meuGPSLocal.setOnClickListener(new OnClickListener(){
+						public void onClick(View v) {
+							locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+							if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+								controlador.setCenter(ondeEstou.getMyLocation());
+							}
+							else{
+								mensagemGPS(0);
+							}
+						}
+					});
+				} catch (NullPointerException e) {
+					Toast.makeText(this, "Problema ao centralizar o mapa", Toast.LENGTH_SHORT).show();
+				}
 			
 			try {
 				getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
@@ -226,6 +236,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			Toast.makeText(this, "Erro Nulpoint", Toast.LENGTH_SHORT).show();
 		}
 
+	}
+	
+	public void mensagemGPS(int numero){
+		if(numero == 0){
+			Toast.makeText(this, "GPS inativo. Ative-o", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	/**
@@ -250,7 +266,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 				proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 				
 				//Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
-				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 60000000, -1, proximityIntent);
+				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 6000, -1, proximityIntent);
 				
 				IntentFilter intentFilter = new IntentFilter(POI_REACHED);
 				registerReceiver(new ProximityAlertReceiver(), intentFilter);
@@ -352,7 +368,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			super.onResume();
 			ondeEstou.enableMyLocation();
 		} catch (NullPointerException e) {
-			Toast.makeText(this, "Erro null", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -367,7 +382,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			super.onPause();
 			ondeEstou.disableMyLocation();
 		} catch (NullPointerException e) {
-			Toast.makeText(this, "Erro null", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
