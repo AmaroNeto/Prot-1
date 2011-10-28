@@ -1,12 +1,6 @@
 package br.android.GPS;
 
 
-/**
- * Classe principal. Aqui são cadastrados os pontos turísticos. Também é onde atualizamos a posição do usuário conforme ele vai se
- * movimentando. Ao clicar nos pontos turísticos é mostrado uma mensagem.
- * @author Glauber
- * 
- */
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +41,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Classe responsável por controlar toda a parte de GPS do aplicativo. Nela estão inseridos os métodos de busca de lugares
+ * chamada dos tipos de visão (Satélite e Street), centralizar overlays, Uso do GPS e criação dos overlays (Pontos 
+ * criados e "setados" no mapa.
+ * 
+ * @author Omega
+ *
+ */
 public class GPS_FinalActivity extends MapActivity implements LocationListener, OnInitListener{
 
 	private MapController controlador;
@@ -58,8 +60,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private Drawable imagem;
 	private List<OverlayItem> pontos;
 	private TextToSpeech tts;
-
-	
 	private static final String TAG = "ProximityTest";
 	private final String POI_REACHED = "com.example.proximitytest.POI_REACHED";
 	private PendingIntent proximityIntent;
@@ -67,20 +67,33 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	@Override 
 	public void onCreate(Bundle savedInstanceState) throws NullPointerException{
 		try{
+			//Criação da tela
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.maingps);
 			setupProximityAlert();			
 			
+			//Criação do mapa
 			map = (MapView) findViewById(R.id.mapa);
 			map.setStreetView(true);
 			map.setClickable(true); 
 			map.setBuiltInZoomControls(true);
 			
+			//Criação do controlador
 			controlador = map.getController();
+			//Zoom inicial do maps (Pode ser alterado de 1 até 21)
 			controlador.setZoom(15);
 			
+			//Criação da variável responsável pela tradução da String para aúdio
 			tts = new TextToSpeech(this, this);
 			 
+			/**
+			 * Criação dos overlays. Aqui é necessário pegar a coordenada (O JSON oferece a coordenada como double e apenas retirar
+			 * o ponto para que o GEOPOINT reconhecça como int e faça o cálculo
+			 * 
+			 * A imagem "seta1" pode ser alterada por outro ícone
+			 * O 3º parâmetro da criação do overlay será utilizado para um breve resumo do ponto turístico. Esse parâmetro
+			 * será o utilizado pelo tts (Mencionado acima)
+			 */
 			imagem = getResources().getDrawable(R.drawable.seta1);
 			pontos = new ArrayList<OverlayItem>();
 			pontos.add(new OverlayItem(new GeoPoint(-7998950, -34931492), "Ponto 1", "Centro do Dois irmãos. Visite o Horto e fique maravilhado com os animais"));
@@ -88,11 +101,14 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			pontos.add(new OverlayItem(new GeoPoint(-8016911,-34848361), "Ponto 3", "Praça do carmo em Olinda. Carnaval bom demais"));
 			pontos.add(new OverlayItem(new GeoPoint(-8055535,-34870693), "Ponto 4", "Centro do Recife. Carnaval bom demais"));
 			
+			//Pega todos os overlays e joga no mapa
 			ImagensOverlay pontosOverlay = new ImagensOverlay(GPS_FinalActivity.this,pontos,imagem);
 			map.getOverlays().add(pontosOverlay);
 			
+			//Pega a localização inicial do usuário através do GPS
 			Location location = getLocationManager().getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			
+			//A localização sendo diferente de null o mapa é centralizado na coordenada passada pelo GPS
 			try {
 				if(location != null){
 					Ponto ponto = new Ponto(location);
@@ -100,20 +116,32 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 				}
 
 			} catch (NullPointerException e) {
-
+				//
 			}
-
+			
+			//ondeEstou : Overlay do usuário
 			ondeEstou = new MyLocationOverlay(this, map);
 			ondeEstou.enableMyLocation();
 			map.getOverlays().add(ondeEstou);
-		
+			
+			/**
+			 * Botões utilizados no mapa
+			 * Respectivamente: 
+			 * Visão de satélite
+			 * Visão de rua; (Visão inicial)
+			 * Pesquisar (Pega a string colocada no edit text iniciado mais abaixo)
+			 * Centralizar na coordenada do usuário caso ele não queira diminuir o zoom para encontrar seu overlay 
+			 */
 			Button buttonSatView = (Button) findViewById(R.id.buttonSateliteView);
 			Button buttonStreetView = (Button) findViewById(R.id.buttonStreetView);
 			Button bntSearch = (Button) findViewById(R.id.pesquisar);
 			Button meuGPSLocal = (Button) findViewById(R.id.voltarAoCentro);
 			
+			/*
+			 * Este trecho do código é chamado ao clicar o botão pesquisar.
+			 * A string colocada no edittex será pesquisada e retornará a coordenada.
+			 */
 			gc = new Geocoder(this);
-
 			bntSearch.setOnClickListener(new OnClickListener() {
 				public void onClick(View v){
 					EditText adress = (EditText) findViewById(R.id.campoTexto);
@@ -122,12 +150,15 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 					try {
 
 						List<Address> foundAdresses = gc.getFromLocationName(addressInput, 5);
-
+						
+						//Caso a string não seja encontrada
 						if (foundAdresses.size() == 0) {
 							Toast.makeText(map.getContext(), "Lugar não encontrado.\nVerifique o endereço digitado", Toast.LENGTH_LONG).show();
 
 						}
-
+						/*
+						 * Conversão da latitude e longitude e navegação para o ponto (Caso encontrado)
+						 */
 						else {
 							for (int i = 0; i < foundAdresses.size(); ++i) {
 								Address x = foundAdresses.get(i);
@@ -144,7 +175,10 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 
 
 				/**
-				 * Navigates a given MapView to the specified Longitude and Latitude
+				 * Função que levará o usuário para o ponto informado no mapa
+				 * @param latitude
+				 * @param longitude
+				 * @param mv
 				 */
 				public void navigateToLocation (double latitude, double longitude, MapView mv) {
 					GeoPoint p = new GeoPoint((int) latitude, (int) longitude);
@@ -153,22 +187,25 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 					mc.animateTo(p);
 				}
 			});
-
+			
+			//Botão que altera a visão para o tipo satélite
 			buttonSatView.setOnClickListener(new OnClickListener() {
 				public void onClick(View v){
 					map.setSatellite(true);
 					map.setStreetView(false);
 				}
 			});
-
+			
+			//Botão que altera a visão para o modo street
 			buttonStreetView.setOnClickListener(new OnClickListener() {
 				public void onClick(View v){
 					map.setStreetView(true);
 					map.setSatellite(false);
 				}
 			});
-
+			
 			try {
+				//Botão que centraliza o mapa no overlay do usuário
 				meuGPSLocal.setOnClickListener(new OnClickListener(){
 					public void onClick(View v) {
 						controlador.setCenter(ondeEstou.getMyLocation());
@@ -191,7 +228,16 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 
 	}
 	
+	/**
+	 * Função que verifica se o GPS está ligado. Caso o GPS esteja ativo ele irá verificar se a coordenada
+	 * do usuário está próxima do ponto informado dentro da função. O ponto foi fixado porém pode ser alterado
+	 * @throws NullPointerException
+	 */
 	private void setupProximityAlert() throws NullPointerException {
+		
+		/**
+		 * Thread criada para otimizar a pesquisa entre overlay do usuário e o ponto informado
+		 */
 		new Thread(){
 			public void run(){
 		try {
@@ -203,6 +249,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 				Intent intent = new Intent(POI_REACHED);
 				proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 				
+				//Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
 				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 60000000, -1, proximityIntent);
 				
 				IntentFilter intentFilter = new IntentFilter(POI_REACHED);
@@ -219,18 +266,30 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 		
 	}
 	
+	/**
+	 * Classe que é chamada no caso do overlay estar dentro do raio do overlay passado para teste.
+	 * Na classe abaixo é visualizado na tela uma string e é chamado o tts
+	 * @author Glauber
+	 *
+	 */
 	private class ProximityAlertReceiver extends BroadcastReceiver
 	{
 		public void onReceive(Context context, Intent intent) {
 			tts.speak("Alerta de proximidade com o ponto registrado", TextToSpeech.QUEUE_ADD, null);
-			Toast.makeText(context, "Alerta de proximidade com o ponto registrado. Distância de ", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Alerta de proximidade com o ponto registrado", Toast.LENGTH_LONG).show();
 			Log.d(TAG, "Você está próximo ao centro do bairro de dois irmãos");
 		}
 	}
 
-	
+	/**
+	 * Método responsável pelas repostas quando é usada alguma tecla na aplicação
+	 * @param keyCode
+	 * @param event
+	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event){
+		
+		//Caso o botão de voltar do aparelho seja utilizado o programa é finalizado
 		if(keyCode == KeyEvent.KEYCODE_BACK){
 			finishActivity(0);
 		}
@@ -242,22 +301,31 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	
 	@Override
 	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
-
+	/**
+	 * 
+	 * @return
+	 * @throws NullPointerException
+	 */
 	private LocationManager getLocationManager() throws NullPointerException {
 		try {
 			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 			return locationManager;
 		} catch (NullPointerException e) {
-			Toast.makeText(this, "Erro nullpoint", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Erro nullpoint LocationManager", Toast.LENGTH_SHORT).show();
 		}
 		return null;
 	}
 
-	
+	/**
+	 * Método chamado quando é verificado que a posição do usuário sofreu alguma mudança
+	 * Obs: a linha "controlador.animateTo(geoPoint)" foi comentada pois utilizamos a pesquisa de lugares e sempre que o usuário
+	 * se move ela centralizada no seu overlay
+	 *  
+	 * @param location
+	 */
 	@Override
 	public void onLocationChanged(Location location) throws NullPointerException{
 		try {
@@ -266,12 +334,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			map.invalidate();
 			
 		} catch (NullPointerException e) {
-			Toast.makeText(this, "Erro nullpoint no TTS", Toast.LENGTH_SHORT).show();
-		} catch (RuntimeException e) {
-			Toast.makeText(this, "Erro Runtime no TTS", Toast.LENGTH_SHORT).show();
 		}
 	}
 
+	/**
+	 * Método criado para destruir os updates da localização do usuário e melhorar a performance
+	 */
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
@@ -288,7 +356,11 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 		}
 	}
 
-
+	
+	/**
+	 * Método chamado caso o usuário pressione a tecla HOME do aparelho ou ocorra qualquer outra atividade
+	 * que não necessite que o app seja fechado (Apenas colocado em segundo plano)
+	 */
 	@Override
 	protected void onPause() throws NullPointerException{
 		try {
@@ -298,7 +370,10 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			Toast.makeText(this, "Erro null", Toast.LENGTH_SHORT).show();
 		}
 	}
-
+	
+	/**
+	 * Os métodos abaixo são complementares ao programa e serão utilizados conforme o projeto for crescendo
+	 */
 	@Override
 	public void onProviderDisabled(String provider) {
 		

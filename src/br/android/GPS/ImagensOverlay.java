@@ -16,8 +16,8 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 /**
- * Classe responsável pela criação e edição dos pontos turísticos que serão utilizados no protótipo
- * @author Glauber
+ * Classe responsável pela criação e edição dos pontos turísticos (Overlays) que serão utilizados no protótipo
+ * @author Omega
  *
  */
 public class ImagensOverlay extends ItemizedOverlay implements OnInitListener{
@@ -25,7 +25,15 @@ public class ImagensOverlay extends ItemizedOverlay implements OnInitListener{
 	private final List<OverlayItem> imagens;
 	private final Context context;
 	private TextToSpeech tts;
-
+	
+	/**
+	 * Construtor do overlay. Recebe o mapa como context (Nesse caso), os pontos turísticos (Nesse caso) e a imagem utilizada para
+	 * os overlays
+	 *  
+	 * @param context
+	 * @param imagens
+	 * @param drawable
+	 */
 	public ImagensOverlay(Context context, List<OverlayItem> imagens, Drawable drawable) {
 		super(drawable);
 		this.context = context;
@@ -59,6 +67,11 @@ public class ImagensOverlay extends ItemizedOverlay implements OnInitListener{
 		return imagens.size();
 	}
 	
+	/**
+	 * Método utilizado quando é clicado sobre um overlay. Nele chamamos a função TTS.
+	 * Quando chamada, ela apresenta uma mensagem na tela do usuário e lê essa mensagem
+	 * @param i
+	 */
 	@Override
 	protected boolean onTap(int i){
 		OverlayItem overlayItem = imagens.get(i);
