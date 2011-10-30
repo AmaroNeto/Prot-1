@@ -64,7 +64,14 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.maingps);
 			
-			setupProximityAlert();			
+			new Thread(){
+				public void run(){
+					try {
+						setupProximityAlert();
+					} catch (NullPointerException e) {
+					}
+				}
+			}.start();
 			
 			//Criação do mapa
 			map = (MapView) findViewById(R.id.mapa);
@@ -98,7 +105,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			pontos.add(new OverlayItem(new GeoPoint(-7998950, -34931492), "Ponto 1", "Centro do Dois irmãos. Visite o Horto e fique maravilhado com os animais"));
 			pontos.add(new OverlayItem(new GeoPoint(-8126270, -34903793), "Ponto 2", "Centro de Boa Viagem. Praias lindas para visitar"));
 			pontos.add(new OverlayItem(new GeoPoint(-8016911,-34848361), "Ponto 3", "Praça do carmo em Olinda. Carnaval bom demais"));
-			pontos.add(new OverlayItem(new GeoPoint(-8055535,-34870693), "Ponto 4", "Centro do Recife. Carnaval bom demais"));
+			pontos.add(new OverlayItem(new GeoPoint(-7948270, -34861523), "Ponto 4", "Maranguape 1"));
 			
 			//Pega todos os overlays e joga no mapa
 			ImagensOverlay pontosOverlay = new ImagensOverlay(GPS_FinalActivity.this,pontos,imagem);
@@ -257,8 +264,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 				proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 				
 				//Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
-				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 18000, -1, proximityIntent);
-				
+				locationManager.addProximityAlert(-7948270, -34861523, (float) (7.5*1E7), -1, proximityIntent); 
 				IntentFilter intentFilter = new IntentFilter(POI_REACHED);
 				registerReceiver(new ProximityAlertReceiver(), intentFilter);
 			} else {
@@ -282,8 +288,8 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private class ProximityAlertReceiver extends BroadcastReceiver
 	{
 		public void onReceive(Context context, Intent intent) {
-			tts.speak("Alerta de proximidade com o ponto registrado", TextToSpeech.QUEUE_ADD, null);
-			Toast.makeText(context, "Alerta de proximidade com o ponto registrado", Toast.LENGTH_LONG).show();
+			tts.speak("Mais adiante você pode visualizar a sua casa", TextToSpeech.QUEUE_ADD, null);
+			Toast.makeText(context, "Mais adiante você pode visualizar a sua casa", Toast.LENGTH_LONG).show();
 			Log.d(TAG, "Você está próximo ao centro do bairro de dois irmãos");
 		}
 	}
@@ -332,11 +338,10 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	@Override
 	public void onLocationChanged(Location location) throws NullPointerException{
 		try {
-			GeoPoint geoPoint = new Ponto(location);
-			//controlador.animateTo(geoPoint);
+			//Toast.makeText(map.getContext(), String.valueOf(Math.sqrt(Math.pow((ondeEstou.getMyLocation().getLatitudeE6() - 7948270),2) + (Math.pow(ondeEstou.getMyLocation().getLongitudeE6() - 34861523, 2)))),Toast.LENGTH_LONG).show();
 			map.invalidate();
-			
-		} catch (NullPointerException e) {
+			} 
+		catch (NullPointerException e) {
 		}
 	}
 
