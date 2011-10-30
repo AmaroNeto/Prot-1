@@ -1,12 +1,14 @@
 package br.android.GPS;
 
-import br.android.labi9.Principal;
 import br.android.labi9.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 /**
@@ -19,21 +21,31 @@ import android.widget.Toast;
 public class GPS_Progress_Dialog extends Activity{
 	
 	private ProgressDialog dialog;
+	private Location location;
+	private Handler handler = new Handler();
 	
+	public ProgressDialog getDialog() {
+		return dialog;
+	}
+
+	public void setDialog(ProgressDialog dialog) {
+		this.dialog = dialog;
+	}
+
 	/**
-	 * Criando a barra de progresso (Espera)
+	 * Criando a barra de progresso (Espera) que aguarda até o usuário ativar o GPS
 	 * @param icicle
 	 */
 	public void onCreate(Bundle icicle){
 		super.onCreate(icicle);
 		setContentView(R.layout.aguardando_gps);
-		
-		dialog = ProgressDialog.show(this, "GPS", "Aguardando ativar GPS", false, true);
+		dialog = ProgressDialog.show(this, "GPS", "Arraste a barra superior para baixo e clique no ícone GPS", false, true);
 		CarregarGPS();
 	}
 
 	/**
-	 * Mantém a barra de progresso até que o GPS seja ativado pelo usuário. O intervalo entre cada thread é de 5 segundos
+	 * Informa como o usuário pode ativar o GPS e aguarda até que o procedimento seja concluído
+	 * 
 	 */
 	private void CarregarGPS() {
 		new Thread(){
@@ -42,11 +54,10 @@ public class GPS_Progress_Dialog extends Activity{
 				try {
 					LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 					if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-						Intent intent = new Intent(GPS_Progress_Dialog.this, GPS_FinalActivity.class);
-						dialog.dismiss();
-						startActivity(intent);
+						BuscandoCoordenadas();
 					}
 					else{
+						//evita o fechamento do programa de forma inesperada
 						Thread.sleep(5000);
 						run();
 					}
@@ -63,9 +74,49 @@ public class GPS_Progress_Dialog extends Activity{
 	}
 	
 	/**
+	 * Procura as coordenadas do usuário. Enquanto se realizando a busca, uma mensagem pede que o usuário aguarde
+	 */
+	public void BuscandoCoordenadas() {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				dialog.setMessage("Aguarde\nBuscando coordenadas do usuário");
+				dialog.onStart();
+				location = getLocationManager().getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				if(location.getAltitude() != 0){
+					chamarNovaTela();
+				}
+				else{
+					BuscandoCoordenadas();
+				}
+			}
+		});
+	}
+	
+	private LocationManager getLocationManager() throws NullPointerException {
+		try {
+			LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			return locationManager;
+		} catch (NullPointerException e) {
+			Toast.makeText(this, "Erro nullpoint LocationManager", Toast.LENGTH_SHORT).show();
+		}
+		return null;
+	}
+	
+	/**
 	 * Mensagem passada em caso de erro por NullPoint
 	 */
 	public void mensagem(){
 		Toast.makeText(this, "Problema ao centralizar o mapa", Toast.LENGTH_SHORT).show();
 	}
+	
+	/**
+	 * Chama o mapa com o overlay do usuário centralizado nas coordenadas encontradas pelo GPS
+	 */
+	public void chamarNovaTela(){
+		dialog.dismiss();
+		Intent intent = new Intent(this, GPS_FinalActivity.class);
+		startActivity(intent);
+	}
+	
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
+import br.android.GPS.AlertaConfirmacaoGPS;
 import br.android.base.Atividades;
 import br.android.base.Eventos;
 import br.android.base.Filmes;
@@ -113,7 +114,7 @@ public class Login extends Activity implements OnClickListener{
 		dialogo = ProgressDialog.show(this, "Analisando Usuario", "Aguarde enquanto buscamos suas informacoes...", false, true);
 		this.criarUsuario();
 		
-		Intent it = new Intent(this,br.android.GPS.GPS_Progress_Dialog.class);
+		Intent it = new Intent(this,AlertaConfirmacaoGPS.class);
 		startActivity(it);
 		
 	}

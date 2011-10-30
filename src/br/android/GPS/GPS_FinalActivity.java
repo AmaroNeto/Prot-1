@@ -4,21 +4,14 @@ package br.android.GPS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import br.android.labi9.R;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.OverlayItem;
-
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,14 +23,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -88,7 +79,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 
 			//Criação da variável responsável pela tradução da String para aúdio
 			tts = new TextToSpeech(this, this);
-			 
+			
+			//ondeEstou : Overlay do usuário
+			ondeEstou = new MyLocationOverlay(this, map);
+			ondeEstou.enableMyLocation();
+			map.getOverlays().add(ondeEstou);
+			
 			/**
 			 * Criação dos overlays. Aqui é necessário pegar a coordenada (O JSON oferece a coordenada como double e apenas retirar
 			 * o ponto para que o GEOPOINT reconhecça como int e faça o cálculo
@@ -121,11 +117,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			} catch (NullPointerException e) {
 				//
 			}
-			
-			//ondeEstou : Overlay do usuário
-			ondeEstou = new MyLocationOverlay(this, map);
-			ondeEstou.enableMyLocation();
-			map.getOverlays().add(ondeEstou);
 			
 			/**
 			 * Botões utilizados no mapa
@@ -213,7 +204,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 					meuGPSLocal.setOnClickListener(new OnClickListener(){
 						public void onClick(View v) {
 							locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-							if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+							if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) && ondeEstou.getMyLocation().getLatitudeE6() != 0) {
 								controlador.setCenter(ondeEstou.getMyLocation());
 							}
 							else{
@@ -228,12 +219,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			try {
 				getLocationManager().requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 			} catch (NullPointerException e) {
-				Toast.makeText(this, "Erro Nulpoint", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Erro Nulpoint requestLocationUpdates", Toast.LENGTH_SHORT).show();
 			}
 		}
 
 		catch (NullPointerException e) {
-			Toast.makeText(this, "Erro Nulpoint", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Erro Nulpoint classe GPS_FinalActivity", Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -266,7 +257,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 				proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 				
 				//Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
-				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 6000, -1, proximityIntent);
+				locationManager.addProximityAlert(-7.998950*1E6, -34.931492*1E6, 18000, -1, proximityIntent);
 				
 				IntentFilter intentFilter = new IntentFilter(POI_REACHED);
 				registerReceiver(new ProximityAlertReceiver(), intentFilter);
@@ -307,18 +298,14 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 		
 		//Caso o botão de voltar do aparelho seja utilizado o programa é finalizado
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			finishActivity(0);
+			finish();
 		}
 				
 		return super.onKeyDown(keyCode, event);
 
 		
 	}
-	
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
+
 
 	/**
 	 * 
@@ -409,5 +396,11 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	@Override
 	public void onInit(int status) {
 		
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
