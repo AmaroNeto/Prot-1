@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<!-- Titulo da Praia de boa Viagem-->
+	
+	<string name="praia_de_boa_viagem_pt">Praia de Boa Viagem</string>
+    <string name="praia_de_boa_viagem_en">Boa Viagem beach</string>
+    <string name="praia_de_boa_viagem_fr">Boa Viagem plage</string>
+    <string name="praia_de_boa_viagem_es">La Playa de Boa Viagem</string>
+    <string name="praia_de_boa_viagem_ge">Boa Viagem Strand</string>
+    <string name="praia_de_boa_viagem_it">Boa Viagem spiaggia</string>
+    
+   	<!-- Voz do GPS da Praia de boa Viagem-->
+   	
+   	<string name="praia_de_boa_viagem_gps_voz_pt">A Praia de Boa Viagem é uma das mais famosas do Brasil. 
+A maior parte da praia de Boa Viagem é protegida por uma barreira de recifes naturais, os quais deram nome à cidade.</string>
+
+	<string name="praia_de_boa_viagem_gps_voz_en">The Boa Viagem beach is one of the most famous in Brazil. 
+Most of the Boa Viagem beach is protected by a natural barrier reef, which gave the town its name.</string>
+	
+	<string name="praia_de_boa_viagem_gps_voz_fr"> La Boa Viagem plage est l\'un des plus célèbres au Brésil. La plupart de la Boa Viagem plage est protégée par un récif de barrière naturelle, qui a donné son nom au village.</string>
+
+	<string name="praia_de_boa_viagem_gps_voz_es"> La playa de Boa Viagem es una de las más famosas de Brasil. 
+La mayor parte de la playa de Boa Viagem está protegida por un arrecife de barrera natural, que dio su nombre al pueblo.</string>
+	
+    <string name="praia_de_boa_viagem_gps_voz_ge">Der Strand von Boa Viagem ist eine der berühmtesten in Brasilien. 
+Die meisten der Strand von Boa Viagem ist durch eine natürliche Barriere Riff, das die Stadt ihren Namen gab geschützt.</string>
+    
+    <string name="praia_de_boa_viagem_gps_voz_it">La spiaggia di Boa Viagem è uno dei più famosi in Brasile. 
+La maggior parte della spiaggia di Boa Viagem è protetta da una barriera corallina naturale, che ha dato il nome alla città.</string>
+
+	<!-- Texto da Praia de boa Viagem-->
+	
+    <string name="praia_de_boa_viagem_texto_pt"> São sete quilômetros de areias claras, coqueiros e um mar de águas verdes pontuado por piscinas naturais. 
+No extenso calçadão, há quiosques padronizados, pista de Cooper, chuveiros, quadras de vôlei e equipamentos para musculação. 
+Um dos pontos mais concorridos da praia é o trecho entre as ruas Félix de Brito e Melo e Antônio Falcão, em frente ao Edifício Acaiaca.  
+Encontra-se de tudo em Boa Viagem  – de abacaxi fresquinho a caldinho de sururu e de feijão, além de repentistas e emboladores. 
+Devido à presença de tubarões nesta praia, os mergulhos são permitidos apenas nas áreas protegida por recifes naturais. O surf está proibido. </string>
+    
+    <string name="praia_de_boa_viagem_texto_en"> Seven miles of white sands, palm trees and a sea of ​​green waters dotted with pools. 
+In the extensive boardwalk, there are standardized kiosks, jogging track, showers, volleyball and weight equipment. 
+One of the busiest beach is the stretch between the streets and Felix de Melo Brito and Antonio Falcon, in front of the building Acaiaca. 
+You are all in Boa Viagem - pineapple fresh mussels from the broth and beans, and suddenly and muddy. 
+Due to the presence of sharks at this beach, dips are allowed only in areas protected by natural reefs. Surfing is prohibited.</string>
+    
+    <string name="praia_de_boa_viagem_texto_fr"> Sept miles de sable blanc, des palmiers et une mer aux eaux vertes parsemées de piscines. 
+Dans le vaste promenade, il ya des kiosques standardisés, piste de jogging, des douches, volley-ball et de l\'équipement de poids. 
+L\'un des plus fréquentés plage est le tronçon entre les rues et Felix de Melo Brito et Antonio Falcon, en face de la Acaiaca bâtiment. 
+Vous êtes tous à Boa Viagem - moules d\'ananas frais à partir du bouillon et les haricots, et soudain et boueux. 
+En raison de la présence de requins dans cette plage, les trempettes sont autorisés uniquement dans les zones protégées par des récifs naturels. Le surf est interdite.</string>
+    
+    <string name="praia_de_boa_viagem_texto_es"> Siete kilómetros de arena blanca, palmeras y un mar de aguas verdes salpicadas de piscinas. 
+En el paseo marítimo amplio, hay quioscos estandarizados, pista de jogging, duchas, voleibol y pesas. 
+Uno de la playa más concurrida es el tramo comprendido entre las calles de Melo y Félix Brito y Antonio Falcón, frente a la Acaiaca edificio. 
+Todos ustedes están en Boa Viagem - mejillones piña fresca a partir del caldo y los frijoles, y de repente y barro. 
+Debido a la presencia de tiburones en esta playa, las inmersiones se permiten sólo en las áreas protegidas por arrecifes naturales. El surf es prohibido.</string>
+    
+    <string name="praia_de_boa_viagem_texto_ge">Sieben Meilen von weißen Sandstränden, Palmen und einem Meer von grünen Gewässer mit Pools punktiert. 
+In der umfangreichen Promenade gibt es standardisierte Kioske, Joggingstrecke, Duschen, Volleyball-und Kraftgeräten. 
+Eine der belebtesten Strand ist die Strecke zwischen den Straßen und Felix de Melo Brito und Antonio Falcon, vor dem Gebäude Acaiaca. 
+Sie sind alle in Boa Viagem - Ananas frische Muscheln aus der Brühe und Bohnen, und plötzlich und schlammig. 
+Durch die Anwesenheit von Haien an diesem Strand sind Dips nur in Gebieten mit natürlichen Riffen geschützten erlaubt. Surfen ist untersagt.</string>
+
+	<string name="praia_de_boa_viagem_texto_it">Sette chilometri di sabbia bianca, palme e un mare di acque verdi punteggiate con piscine. 
+In passerella estesa, ci sono chioschi standardizzati, pista da jogging, docce, pallavolo e attrezzature di peso. 
+Una delle spiaggia più frequentata è il tratto tra le vie e Felix de Melo Brito e Antonio Falcone, di fronte al Acaiaca dell\'edificio. 
+Siete tutti a Boa Viagem - mitili ananas fresco dal brodo e fagioli, e improvvisamente e fangosi. 
+A causa della presenza di squali in questa spiaggia, tuffi sono consentiti solo in aree protette da barriere naturali. 
+Navigare è vietato.</string>
+    
+</resources>
