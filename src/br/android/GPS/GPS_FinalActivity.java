@@ -4,6 +4,8 @@ package br.android.GPS;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.android.controle.Controle;
 import br.android.labi9.R;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -103,10 +105,15 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			 */
 			imagem = getResources().getDrawable(R.drawable.seta1);
 			pontos = new ArrayList<OverlayItem>();
-			pontos.add(new OverlayItem(new GeoPoint(-8014189, -34947911), "Ponto 1", "NTI"));
-			pontos.add(new OverlayItem(new GeoPoint(-8126270, -34903793), "Ponto 2", "Centro de Boa Viagem. Praias lindas para visitar"));
-			pontos.add(new OverlayItem(new GeoPoint(-8016911,-34848361), "Ponto 3", "Praça do carmo em Olinda. Carnaval bom demais"));
-			pontos.add(new OverlayItem(new GeoPoint(-7948270, -34861523), "Ponto 4", "Maranguape 1"));
+			
+			/**
+			 * Overlays que serão utilizados no programa
+			 */
+			pontos.add(new OverlayItem(new GeoPoint(-8016829,-34848365), "Praça do carmo", ""));
+			pontos.add(new OverlayItem(new GeoPoint(-8016465,-34850186), "Igreja Nossa Senhora do Carmo", ""));
+			pontos.add(new OverlayItem(new GeoPoint(-8016465,-34850926), "Estação Quatro Cantos", ""));
+			
+			
 			
 			//Pega todos os overlays e joga no mapa
 			ImagensOverlay pontosOverlay = new ImagensOverlay(GPS_FinalActivity.this,pontos,imagem);
@@ -125,6 +132,11 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			} catch (NullPointerException e) {
 				//
 			}
+			
+			/**
+			 * Acesso ao controle do programa
+			 */
+			Controle controle = Controle.getInstancia();
 			
 			/**
 			 * Botões utilizados no mapa
@@ -264,8 +276,13 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 						Intent intent = new Intent(POI_REACHED);
 						proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-						//Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
-						locationManager.addProximityAlert(-8.014190, -34.947911, 13.000f, -1, proximityIntent);
+						/**
+						 * Função que recebe a latitude, longitude, raio de busca e a variável proximityIntent
+						 * Ao passar as coordenadas dividir o valor por 1E6
+						 * Raio definido = 50 metros
+						 * Coordenadas do NTI
+						 */
+						locationManager.addProximityAlert(-7.948270, -34.861523, 50, -1, proximityIntent);
 						IntentFilter intentFilter = new IntentFilter(POI_REACHED);
 						registerReceiver(new ProximityAlertReceiver(), intentFilter);
 
@@ -290,8 +307,8 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private class ProximityAlertReceiver extends BroadcastReceiver
 	{
 		public void onReceive(Context context, Intent intent) {
-			//tts.speak("Ponto dentro do raio estabelecido pelo alerta intent", TextToSpeech.QUEUE_ADD, null);
-			Toast.makeText(context, "Ponto dentro do raio estabelecido", Toast.LENGTH_LONG).show();
+			tts.speak("Maranguape 1", TextToSpeech.QUEUE_ADD, null);
+			Toast.makeText(context, "Ponto dentro do raio estabelecido\nCasa - 50m", Toast.LENGTH_LONG).show();
 			Log.d(TAG, "Você está próximo ao centro do bairro de dois irmãos");
 		}
 	}
@@ -326,13 +343,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 		}
 		return null;
 	}
-	
-	public float distanciaDoisPontos(double latititude, double longitude){
-		float[] results = new float[1];
-		Location.distanceBetween(ondeEstou.getMyLocation().getLatitudeE6(),ondeEstou.getMyLocation().getLongitudeE6(),latititude,longitude, results);
-		float distance = (float) (results[0]);
-		return distance;
-	}
 
 	/**
 	 * Método chamado quando é verificado que a posição do usuário sofreu alguma mudança
@@ -344,17 +354,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	@Override
 	public void onLocationChanged(Location location) throws NullPointerException{
 		try {
-			//float[] results = new float[1];
-			//Location.distanceBetween(ondeEstou.getMyLocation().getLatitudeE6()/1E6,ondeEstou.getMyLocation().getLongitudeE6()/1E6,-8.014189, -34.947911, results);
-			//float distance = (float) (results[0]/1E3);
-			//Toast.makeText(map.getContext(),ondeEstou.getMyLocation().getLatitudeE6() + "\n" + ondeEstou.getMyLocation().getLongitudeE6(),Toast.LENGTH_LONG).show();
-			Toast.makeText(map.getContext(), String.valueOf(distanciaDoisPontos(-8.014189, -34.947911)),Toast.LENGTH_LONG).show();
 			map.invalidate();
 			} 
 		catch (NullPointerException e) {
 		}
 	}
-
+	
 	/**
 	 * Método criado para destruir os updates da localização do usuário e melhorar a performance
 	 */
