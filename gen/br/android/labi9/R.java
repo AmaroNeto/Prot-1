@@ -15,7 +15,7 @@ public final class R {
         public static final int labi9=0x7f020001;
         public static final int labi9_=0x7f020002;
         public static final int mapa=0x7f020003;
-        public static final int seta1=0x7f020004;
+        public static final int ponto1=0x7f020004;
     }
     public static final class id {
         public static final int barraDeProgresso=0x7f050000;

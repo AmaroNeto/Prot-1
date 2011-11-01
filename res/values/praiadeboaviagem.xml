@@ -3,12 +3,12 @@
 	
 	<!-- Titulo da Praia de boa Viagem-->
 	
-	<string name="praia_de_boa_viagem_pt">Praia de Boa Viagem</string>
-    <string name="praia_de_boa_viagem_en">Boa Viagem beach</string>
-    <string name="praia_de_boa_viagem_fr">Boa Viagem plage</string>
-    <string name="praia_de_boa_viagem_es">La Playa de Boa Viagem</string>
-    <string name="praia_de_boa_viagem_ge">Boa Viagem Strand</string>
-    <string name="praia_de_boa_viagem_it">Boa Viagem spiaggia</string>
+	<string name="praia_de_boa_viagem_pt">"Praia de Boa Viagem"</string>
+    <string name="praia_de_boa_viagem_en">"Boa Viagem beach"</string>
+    <string name="praia_de_boa_viagem_fr">"Boa Viagem plage"</string>
+    <string name="praia_de_boa_viagem_es">"La Playa de Boa Viagem"</string>
+    <string name="praia_de_boa_viagem_ge">"Boa Viagem Strand"</string>
+    <string name="praia_de_boa_viagem_it">"Boa Viagem spiaggia"</string>
     
    	<!-- Voz do GPS da Praia de boa Viagem-->
    	

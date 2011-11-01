@@ -4,12 +4,16 @@ import java.util.Vector;
 
 import br.android.base.*;
 
+/**
+ * Classe criada para armazenar os pontos turísticos (Até o momento: Olinda)
+ * @author Lab-i9
+ * @author Omega
+ */
 public class RepositorioPontoTuristicos {
 	
 	private Vector<PontosTuristicos> pontosTuristicos;
 	
 	public RepositorioPontoTuristicos(){
-		
 		this.pontosTuristicos = new Vector<PontosTuristicos>();
 	}
 	

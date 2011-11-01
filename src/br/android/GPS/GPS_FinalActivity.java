@@ -4,9 +4,13 @@ package br.android.GPS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
+import br.android.base.PontosTuristicos;
 import br.android.controle.Controle;
 import br.android.labi9.R;
+import br.android.repositorio.Repositorio;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -53,7 +57,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private double lat;
 	private double lon;
 	private Drawable imagem;
-	private List<OverlayItem> pontos;
+	private Vector<OverlayItem> pontos;
 	private TextToSpeech tts;
 	private static final String TAG = "ProximityTest";
 	private final String POI_REACHED = "com.example.proximitytest.POI_REACHED";
@@ -65,7 +69,12 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 		try{
 			//Criação da tela
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.maingps);
+			setContentView(R.layout.maingps); 
+			Controle controle = Controle.getInstancia();
+			StartOverlay startBD = new StartOverlay();
+			startBD.CadastrarPontos();
+			
+			pontos = new Vector<OverlayItem>();
 			
 			new Thread(){
 				public void run(){
@@ -85,7 +94,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			//Criação do controlador
 			controlador = map.getController();
 			//Zoom inicial do maps (Pode ser alterado de 1 até 21)
-			controlador.setZoom(15);
+			controlador.setZoom(7);
 
 			//Criação da variável responsável pela tradução da String para aúdio
 			tts = new TextToSpeech(this, this);
@@ -99,23 +108,16 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			 * Criação dos overlays. Aqui é necessário pegar a coordenada (O JSON oferece a coordenada como double e apenas retirar
 			 * o ponto para que o GEOPOINT reconhecça como int e faça o cálculo
 			 * 
-			 * A imagem "seta1" pode ser alterada por outro ícone
+			 * A imagem "ponto1" pode ser alterada por outro ícone
 			 * O 3º parâmetro da criação do overlay será utilizado para um breve resumo do ponto turístico. Esse parâmetro
 			 * será o utilizado pelo tts (Mencionado acima)
 			 */
-			imagem = getResources().getDrawable(R.drawable.seta1);
-			pontos = new ArrayList<OverlayItem>();
-			
-			/**
-			 * Overlays que serão utilizados no programa
-			 */
-			pontos.add(new OverlayItem(new GeoPoint(-8016829,-34848365), "Praça do carmo", ""));
-			pontos.add(new OverlayItem(new GeoPoint(-8016465,-34850186), "Igreja Nossa Senhora do Carmo", ""));
-			pontos.add(new OverlayItem(new GeoPoint(-8016465,-34850926), "Estação Quatro Cantos", ""));
-			
-			
+			imagem = getResources().getDrawable(R.drawable.ponto1);			
 			
 			//Pega todos os overlays e joga no mapa
+			for(PontosTuristicos x : controle.getRepositorioPontoTuristicos().listar()){
+				pontos.add(x.getOverlayItem());
+			}
 			ImagensOverlay pontosOverlay = new ImagensOverlay(GPS_FinalActivity.this,pontos,imagem);
 			map.getOverlays().add(pontosOverlay);
 			
@@ -132,11 +134,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			} catch (NullPointerException e) {
 				//
 			}
-			
-			/**
-			 * Acesso ao controle do programa
-			 */
-			Controle controle = Controle.getInstancia();
 			
 			/**
 			 * Botões utilizados no mapa
