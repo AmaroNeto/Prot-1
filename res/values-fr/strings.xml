@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Titulo dos Pontos Turísticos (Francês)-->
+	
+	<string name="biblioteca_publica_de_olinda">"Bibliothèque publique d'Olinda"</string>
+    <string name="farol_de_olinda">"Phare de Olinda"</string>
+    <string name="mercado_eufrasio_barbosa">"Marché Eufrasio Barbosa"</string>
+    
+    
+    
+    <!-- Voz do GPS da Biblioteca Publica de Olinda-->
+    
+	<string name="biblioteca_publica_de_olinda_gps_voz"> Créé par décret impérial du 12.07.1830, la Bibliothèque publique d Olinda a été installé au couvent de San Francisco, étant le 1er et le 5 de Pernambuco au Brésil.</string>
+	<string name="farol_de_olinda_gps_voz"> Construit à l origine sur le Monténégro, Fortescue, le phare a été allumé Olinda en 1872. </string>
+	<string name="mercado_eufrasio_barbosa_gps_voz"> Bâtiment datant du XVIIe et XVIIIe siècles, où il y avait la Maison des Douanes premier Pernambuco, le site a été, entre 1894 et 1960, la Candy Factory Ltd Amorim. Il a un plan rectangulaire, simple couche, en maçonnerie de briques. </string>
+
+	    
+    
+    
+    <!-- Texto dos Pontos Turísticos-->
+    
+    <string name="biblioteca_publica_de_olinda_texto"> Créé par décret impérial du 12.07.1830, la Bibliothèque publique d Olinda a été installé au couvent de San Francisco, étant le 1er et le 5 de Pernambuco au Brésil. Avec le transfert de la Faculté de Droit d Olinda à Recife, l espace ne fonctionnait pas depuis plusieurs décennies, étant rétabli par la loi n ° 4329/1983. Restauré en 1996, la maison de logement de la Bibliothèque publique d Olinda est l un des plus vieux bâtiments de la ville. Il a été peint par Franz Post, au XVIIe siècle. </string>
+    <string name="farol_de_olinda_texto"> Construit à l origine sur le Monténégro, Fortescue, le phare a été allumé Olinda en 1872. Visible 12 miles, le phare actuel a été construit à Morro Sérapion, étant inauguré le 7 Septembre 1941. Pourquoi se démarquer dans le paysage d Olinda, est devenu l un des principaux monuments. </string>
+    <string name="mercado_eufrasio_barbosa_texto"> Bâtiment datant du XVIIe et XVIIIe siècles, où il y avait la Maison des Douanes premier Pernambuco, le site a été, entre 1894 et 1960, la Candy Factory Ltd Amorim. Il a un plan rectangulaire, simple couche, en maçonnerie de briques. Les façades sont toutes remorqué, et les ouvertures principales voûtée avec corniche pleine et rectangulaires. Bien que le bâtiment d origine ont subi des additions, le Mercado da Ribeira do bien lu. Il a un théâtre et un espace pour les expositions et populaire. </string>
+    
+        
+    
+    
+    
+    
+</resources>

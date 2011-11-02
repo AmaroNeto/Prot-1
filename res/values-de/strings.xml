@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Titulo dos Pontos Turísticos (Alemão)-->
+	
+	<string name="biblioteca_publica_de_olinda">"Öffentlichen Bibliothek der Olinda"</string>
+	<string name="farol_de_olinda">"Leuchtturm von Olinda"</string>
+	<string name="mercado_eufrasio_barbosa">"Markt Eufrasio Barbosa"</string>
+    
+    
+    
+    
+    
+    <!-- Voz do GPS da Biblioteca Publica de Olinda-->
+    
+    <string name="biblioteca_publica_de_olinda_gps_voz"> Erstellt durch kaiserlichen Erlass von 1830.07.12 wurde die Public Library of Olinda im Kloster San Francisco installiert, wobei der 1. und 5. von Pernambuco in Brasilien.</string>
+    <string name="farol_de_olinda_gps_voz"> Erbaut ursprünglich auf der Fortescue Montenegro wurde die Olinda Leuchtturm von erstmals 1872 beleuchtet. </string>
+    <string name="mercado_eufrasio_barbosa_gps_voz"> Gebäude aus dem siebzehnten und achtzehnten Jahrhundert, wo es war das erste Customs House of Pernambuco, war der Ort, zwischen 1894 und 1960, die Candy Factory GmbH Amorim. Es hat einen rechteckigen Grundriss, einlagig, in Ziegelmauerwerk. </string>
+    
+    
+    
+    
+    
+    <!-- Texto dos Pontos Turísticos-->
+    
+    <string name="biblioteca_publica_de_olinda_texto"> Erstellt durch kaiserlichen Erlass von 1830.07.12 wurde die Public Library of Olinda im Kloster San Francisco installiert, wobei der 1. und 5. von Pernambuco in Brasilien. Mit der Übertragung der Juristischen Fakultät der Olinda nach Recife, war der Raum nicht funktioniert seit Jahrzehnten, dass durch das Gesetz Nr. 4329/1983 neu gegründet. Restauriert in 1996, ist die Heimat Gehäuse der Public Library of Olinda eines der ältesten Gebäude der Stadt. Es wurde von Franz Beitrag gemalt, in dem siebzehnten Jahrhundert. </string>
+    <string name="farol_de_olinda_texto"> Erbaut ursprünglich auf der Fortescue Montenegro wurde die Olinda Leuchtturm von erstmals 1872 beleuchtet. Visible 12 Meilen, die aktuelle Leuchtturm wurde in Morro Serapion aufgebaut, wobei auf 7. September 1941 eingeweiht. Warum stehen in der Landschaft von Olinda, hat sich zu einem der wichtigsten Sehenswürdigkeiten. </string>
+    <string name="mercado_eufrasio_barbosa_texto"> Gebäude aus dem siebzehnten und achtzehnten Jahrhundert, wo es war das erste Customs House of Pernambuco, war der Ort, zwischen 1894 und 1960, die Candy Factory GmbH Amorim. Es hat einen rechteckigen Grundriss, einlagig, in Ziegelmauerwerk. Die Fassaden sind alle abgeschleppt, und die wichtigsten gewölbte Öffnungen mit Voll-und rechteckigen Vorsprung. Obwohl das ursprüngliche Gebäude Ergänzungen erfahren haben, gehen Sie Mercado da Ribeira nicht falsch verstanden. Es hat ein Theater und ein Bereich für Ausstellungen und beliebt. </string>
+
+	
+    
+    
+      
+</resources>

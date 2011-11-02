@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<!-- Titulo dos Pontos Turísticos (Português)-->
+	
+	<string name="biblioteca_publica_de_olinda">"Biblioteca Pública de Olinda"</string>
+    <string name="farol_de_olinda">"Farol de Olinda"</string>
+    <string name="mercado_eufrasio_barbosa">"Mercado Eufrásio Barbosa"</string>
+   	
+   	
+   	
+   	<!-- Voz do GPS da Biblioteca Publica de Olinda-->
+   	
+   	<string name="biblioteca_publica_de_olinda_gps_voz"> Criada por Decreto Imperial em 07/12/1830, a Biblioteca Pública de Olinda foi instalada no Convento de São Francisco, sendo a 1ª de Pernambuco e a 5ª do Brasil.</string>
+   	<string name="farol_de_olinda_gps_voz"> Construído, originalmente, sobre o Fortim Montenegro, o Farol de Olinda foi aceso pela primeira vez em 1872. </string>
+   	<string name="mercado_eufrasio_barbosa_gps_voz"> Construção datada dos séculos XVII e XVIII, onde existia a primeira Casa da Alfândega de Pernambuco, o local foi, entre 1894 e 1960, a Fábrica de Doces Amorim Ltda. Possui uma planta retangular, em plano único, em alvenaria de tijolos. </string>
+	
+	
+	
+	
+	
+	
+	<!-- Texto da Biblioteca Publica de Olinda-->
+	 
+    <string name="biblioteca_publica_de_olinda_texto"> Criada por Decreto Imperial em 07/12/1830, a Biblioteca Pública de Olinda foi instalada no Convento de São Francisco, sendo a 1ª de Pernambuco e a 5ª do Brasil. Com a transferência da Faculdade de Direito de Olinda para o Recife, o espaço ficou sem funcionar durante várias décadas, sendo restabelecida através da Lei n° 4329/1983. Restaurada em 1996, a casa onde está instalada a Biblioteca Pública de Olinda é uma das construções mais antigas do município. Foi pintada por Franz Post, no século XVII. </string>
+    <string name="farol_de_olinda_texto"> Construído, originalmente, sobre o Fortim Montenegro, o Farol de Olinda foi aceso pela primeira vez em 1872. Visível a 12 milhas, o Farol atual foi construído no Morro Serapião, sendo inaugurado em sete de setembro de 1941. Por se destacar na paisagem de Olinda, tornou-se um dos principais marcos da cidade. </string>
+    <string name="mercado_eufrasio_barbosa_texto"> Construção datada dos séculos XVII e XVIII, onde existia a primeira Casa da Alfândega de Pernambuco, o local foi, entre 1894 e 1960, a Fábrica de Doces Amorim Ltda. Possui uma planta retangular, em plano único, em alvenaria de tijolos. As fachadas são todas rebocadas, sendo a principal com aberturas em arcos plenos e platibanda retangular. Apesar de o prédio original ter sofrido acréscimos, o Mercado da Ribeira não descaracterizou. Dispõe de teatro e área para exposições e apresentações folclóricas. </string>
+    
+    
+    
+    
+    
+    
+    
+</resources>

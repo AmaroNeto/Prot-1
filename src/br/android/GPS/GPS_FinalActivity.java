@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.microedition.khronos.opengles.GL;
+
 import br.android.base.PontosTuristicos;
 import br.android.controle.Controle;
 import br.android.labi9.R;
@@ -23,6 +25,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
@@ -36,6 +40,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.BaseInputConnection;
+import android.webkit.WebIconDatabase.IconListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -101,8 +107,9 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			
 			//ondeEstou : Overlay do usuário
 			ondeEstou = new MyLocationOverlay(this, map);
-			ondeEstou.enableMyLocation();
+			ondeEstou.enableMyLocation();			
 			map.getOverlays().add(ondeEstou);
+		
 			
 			/**
 			 * Criação dos overlays. Aqui é necessário pegar a coordenada (O JSON oferece a coordenada como double e apenas retirar
