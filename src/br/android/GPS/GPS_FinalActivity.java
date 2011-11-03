@@ -69,7 +69,10 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	private final String POI_REACHED = "com.example.proximitytest.POI_REACHED";
 	private PendingIntent proximityIntent;
 	private LocationManager locationManager;
-	
+	/**
+	 * Pacote de idiomas OK
+	 * 
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) throws NullPointerException{
 		try{
@@ -77,8 +80,6 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.maingps); 
 			Controle controle = Controle.getInstancia();
-			StartOverlay startBD = new StartOverlay();
-			startBD.CadastrarPontos();
 			
 			pontos = new Vector<OverlayItem>();
 			
@@ -172,7 +173,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 						
 						//Caso a string não seja encontrada
 						if (foundAdresses.size() == 0) {
-							Toast.makeText(map.getContext(), "Lugar não encontrado.\nVerifique o endereço digitado", Toast.LENGTH_LONG).show();
+							Toast.makeText(map.getContext(), R.string.Lugar_nao_encontrado, Toast.LENGTH_LONG).show();
 
 						}
 						/*
@@ -255,7 +256,7 @@ public class GPS_FinalActivity extends MapActivity implements LocationListener, 
 	
 	public void mensagemGPS(int numero){
 		if(numero == 0){
-			Toast.makeText(this, "GPS inativo. Ative-o", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.GPS_inativo, Toast.LENGTH_LONG).show();
 		}
 	}
 	

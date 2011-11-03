@@ -23,6 +23,7 @@
         <activity android:name="br.android.GPS.GPS_FinalActivity"></activity>
         <activity android:name="br.android.GPS.GPS_Progress_Dialog"></activity>
         <activity android:name="br.android.GPS.AlertaConfirmacaoGPS"></activity>
+        <activity android:name="br.android.GPS.StartOverlay"></activity>
 
     </application>
 </manifest>

@@ -39,7 +39,12 @@ public final class R {
         public static final int principal=0x7f030003;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
+        public static final int Deseja_ativar_GPS=0x7f040002;
+        public static final int GPS_inativo=0x7f040001;
+        public static final int Lugar_nao_encontrado=0x7f040005;
+        public static final int Resposta_nao=0x7f040004;
+        public static final int Resposta_sim=0x7f040003;
+        public static final int app_name=0x7f040000;
         /**  Titulo dos Pontos Turísticos (Padrão - English)
  Titulo dos Pontos Turísticos (Alemão)
  Titulo dos Pontos Turísticos (Espanhol)
@@ -47,7 +52,7 @@ public final class R {
  Titulo dos Pontos Turísticos (Italiano)
  Titulo dos Pontos Turísticos (Português)
          */
-        public static final int biblioteca_publica_de_olinda=0x7f040002;
+        public static final int biblioteca_publica_de_olinda=0x7f040009;
         /**  Voz do GPS da Biblioteca Publica de Olinda
  Voz do GPS da Biblioteca Publica de Olinda
  Voz do GPS da Biblioteca Publica de Olinda
@@ -55,7 +60,7 @@ public final class R {
  Voz do GPS da Biblioteca Publica de Olinda
  Voz do GPS da Biblioteca Publica de Olinda
          */
-        public static final int biblioteca_publica_de_olinda_gps_voz=0x7f040005;
+        public static final int biblioteca_publica_de_olinda_gps_voz=0x7f04000c;
         /**  Texto dos Pontos Turísticos
  Texto dos Pontos Turísticos
  Texto dos Pontos Turísticos
@@ -63,13 +68,15 @@ public final class R {
  Texto dos Pontos Turísticos
  Texto da Biblioteca Publica de Olinda
          */
-        public static final int biblioteca_publica_de_olinda_texto=0x7f040008;
-        public static final int farol_de_olinda=0x7f040003;
-        public static final int farol_de_olinda_gps_voz=0x7f040006;
-        public static final int farol_de_olinda_texto=0x7f040009;
-        public static final int hello=0x7f040000;
-        public static final int mercado_eufrasio_barbosa=0x7f040004;
-        public static final int mercado_eufrasio_barbosa_gps_voz=0x7f040007;
-        public static final int mercado_eufrasio_barbosa_texto=0x7f04000a;
+        public static final int biblioteca_publica_de_olinda_texto=0x7f04000f;
+        public static final int buscando_coordenadas_usuario=0x7f040007;
+        public static final int carregando_overlay_no_mapa=0x7f040008;
+        public static final int como_ativar_GPS=0x7f040006;
+        public static final int farol_de_olinda=0x7f04000a;
+        public static final int farol_de_olinda_gps_voz=0x7f04000d;
+        public static final int farol_de_olinda_texto=0x7f040010;
+        public static final int mercado_eufrasio_barbosa=0x7f04000b;
+        public static final int mercado_eufrasio_barbosa_gps_voz=0x7f04000e;
+        public static final int mercado_eufrasio_barbosa_texto=0x7f040011;
     }
 }

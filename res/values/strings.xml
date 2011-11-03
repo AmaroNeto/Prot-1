@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Login!</string>
     <string name="app_name">Lab-i9</string>
-    
-    
+    <string name="GPS_inativo">"GPS inactive"</string>
+	<string name="Deseja_ativar_GPS">"Want to enable GPS?"</string>
+	<string name="Resposta_sim">"Yes"</string>
+	<string name="Resposta_nao">"No"</string>
+    <string name="Lugar_nao_encontrado">"Location not found. Check the address entered"</string>
+    <string name="como_ativar_GPS">"Drag the top bar down and click on GPS"</string>
+    <string name="buscando_coordenadas_usuario">"Wait. Seeking coordinates of the user."</string>
+    <string name="carregando_overlay_no_mapa">"Loading Overlays on the map"</string>
     
     <!-- Titulo dos Pontos Turísticos (Padrão - English)-->
     

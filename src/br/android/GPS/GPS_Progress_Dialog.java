@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -39,7 +40,8 @@ public class GPS_Progress_Dialog extends Activity{
 	public void onCreate(Bundle icicle){
 		super.onCreate(icicle);
 		setContentView(R.layout.aguardando_gps);
-		dialog = ProgressDialog.show(this, "GPS", "Arraste a barra superior para baixo e clique no ícone GPS", false, true);
+		Resources resources = getResources();
+		dialog = ProgressDialog.show(this, "GPS", resources.getString(R.string.como_ativar_GPS), false, true);
 		CarregarGPS();
 	}
 
@@ -80,7 +82,8 @@ public class GPS_Progress_Dialog extends Activity{
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				dialog.setMessage("Aguarde\nBuscando coordenadas do usuário");
+				Resources resources = getResources();
+				dialog.setMessage(resources.getString(R.string.buscando_coordenadas_usuario));
 				dialog.onStart();
 				location = getLocationManager().getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				if(location.getAltitude() != 0){
@@ -115,7 +118,7 @@ public class GPS_Progress_Dialog extends Activity{
 	 */
 	public void chamarNovaTela(){
 		dialog.dismiss();
-		Intent intent = new Intent(this, GPS_FinalActivity.class);
+		Intent intent = new Intent(this, StartOverlay.class);
 		startActivity(intent);
 	}
 	

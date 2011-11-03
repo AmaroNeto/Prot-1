@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	
+	<string name="app_name">Lab-i9</string>
+	<string name="GPS_inativo">"inactives GPS"</string>
+	<string name="Deseja_ativar_GPS">"Vous voulez activer le GPS?"</string>
+	<string name="Resposta_sim">"Oui"</string>
+	<string name="Resposta_nao">"Non"</string>
+	<string name="Lugar_nao_encontrado">"Emplacement introuvable. Vérifiez l/adresse indiquée"</string>
+	<string name="como_ativar_GPS">"Faites glisser la barre du haut vers le bas et cliquez sur GPS"</string>
+	<string name="buscando_coordenadas_usuario">"Attendre. Cherchant coordonnées de l/utilisateur."</string>
+	<string name="carregando_overlay_no_mapa">"Superpositions de chargement sur ​​la carte"</string>
+	
 	<!-- Titulo dos Pontos Turísticos (Francês)-->
 	
 	<string name="biblioteca_publica_de_olinda">"Bibliothèque publique d'Olinda"</string>
